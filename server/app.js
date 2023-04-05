@@ -21,13 +21,12 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
         console.log('Error connecting to database', error);
     });
 
-
+// Middleware pour parser les requêtes JSON
 app.use(express.json());
 
 // Routes
 const cardRouter = require('./router/card');
 app.use('/cards', cardRouter);
-
 
 // ERROR CASE
 app.use((err, req, res, next) => {

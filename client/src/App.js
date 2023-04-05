@@ -14,7 +14,7 @@ import Game from './pages/Game.js';
 
 const App = () => {
 
-    /*const [cards, setCard] = useState([]);
+ /*   const [cards, setCard] = useState([]);
 
     useEffect(() => {
         fetchData();
@@ -24,7 +24,7 @@ const App = () => {
         const res = await fetch(`http://localhost:8000/cards`);
         const json = await res.json();
         setCard(json);
-    }
+    }*/
 
     const Card = ({value, color}) => {
         return (
@@ -36,7 +36,7 @@ const App = () => {
                 {value}
             </div>
         )
-    }*/
+    }
 
     return (
         <div className="bg-primary w-full overflow-hidden">
