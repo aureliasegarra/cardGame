@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Import Card model
-const Card = require('../models/card');
+const Card = require('../models/card.model');
 
 // GET all cards
 router.get('/', async (req, res) => {

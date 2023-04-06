@@ -74,7 +74,7 @@ const Signup = () => {
                     <div className="flex justify-between text-gray-400 py-2">
                         <p className="flex items-center"><input className="mr-2" type="checkbox" />Remember me</p>
 
-                        <a href="/api" className='hover:text-[#29C9A0]'>
+                        <a href="#" className='hover:text-[#29C9A0]'>
                             <p>Forgot Password</p>
                         </a>
                     </div>

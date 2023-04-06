@@ -76,7 +76,7 @@ L'application est développée avec une stack MERN.
 ##  SetUp <a id="setup"></a>
 ### Front 
 ```bash
-cd server
+cd app
 npm run start
 ```
 * la partie client est accessible sur le localhost:3000
