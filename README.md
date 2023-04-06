@@ -61,10 +61,12 @@ L'application est développée avec une stack MERN.
 * mongoDB
 * Docker pour stocker la bdd
 
+### Architecture
+![illustration](./client/src/assets/architecture.jpg)
 
 
 ## 🎯 Objectives <a id="objectives"></a>
-- Utiliser les technologies web client 
+- Utiliser les technologies web client javascript
 - La création d'un plateau de jeu et d'un ensemble de cartes
 - Travailler avec les bases de données NoSQL
 - Gérer un système d'inscription
