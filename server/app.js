@@ -25,6 +25,7 @@ mongoose.connect(dbUrl, {
     useUnifiedTopology: true})
     .then(() => {
         console.log('Connected to database');
+        console.log("test");
     })
     .catch((error) => {
         console.log('Error connecting to database', error);
@@ -32,16 +33,19 @@ mongoose.connect(dbUrl, {
 
 
 // Simple Route API
-app.get('/', async (req, res) => {
+app.get('/api', async (req, res) => {
     res.json({ message: 'Bienvenue sur l\'API !'});
 });
 
-require("./router/player.route")(app);
+
 
 // ERROR CASE
 app.use((err, req, res, next) => {
+    console.log("requête", req);
     res.status(404).json({name: 'API', version: '1.0', status: 404, message: 'not_found'});
 });
+
+require("./router/player.route")(app);
 
 // Lancement du app
 app.listen(port, () => {

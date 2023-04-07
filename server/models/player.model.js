@@ -1,6 +1,6 @@
 module.exports = mongoose =>{
     const Player = mongoose.model(
-        "player",
+        "players",
         mongoose.Schema(
             {
                 username: {
@@ -21,22 +21,18 @@ module.exports = mongoose =>{
                     required: true
                 },
             },
-            {
-                timestamps: true // ajoute 2 champs au document createdAt et updatedAt
+            { timestamps: true // ajoute 2 champs au document createdAt et updatedAt
             }
         )
     );
-
     // hook executé avant la sauvegarde d'un document. Hash le mot de passe quand il est modifié
-    Player.pre('save', function(next) {
+    /*Player.pre('save', function(next) {
         if (!this.isModified('password')) {
             return next();
         }
         this.password = bcrypt.hashSync(this.password, 10);
         next();
-    });
+    });*/
 
     return Player;
-
-
 };

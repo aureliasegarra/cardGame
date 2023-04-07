@@ -1,26 +1,39 @@
-const db = require("../models/player.model");
-const Player = db.players;
+const bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
+const Player = require("../models/player.model")(mongoose);
 
 exports.create = (req, res) => {
-    if (!req.body.name || !req.body.password){
-        res.status(400).send({ message : "Fields required !"});
-        return;
-    }
+    console.log("req player model", req);
+    const {username, email, password} = req.body;
 
-    const player = new Player({
-        username: req.body.password,
-        password: req.body.password,
-    });
+    // Verification if user already exist
+    /*Player.findOne({email:email},(err, player) => {
+        if (player){
+            res.send({message:"player already exist"});
+        }else{*/
+            // Register in database
+            const player = new Player({username, email, password: bcrypt.hashSync(req.body.password, 10)});
+            player.save(player)
+                .then(data => {
+                    res.send(data);
+                })
+                .catch(err => {
+                    res.status(500).send({message: "error"})
+                })
+};
 
-    player
-        .save(player)
+exports.findAll = (req, res) => {
+    const username = req.query.username;
+    const condition = username ? {username: {$regex: new RegExp(username), $options: "i"}} : {};
+
+    Player.find(condition)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Something went wrong !"
+                    err.message || "Some error occurred while retrieving users."
             });
-        })
-};
+        });
+}

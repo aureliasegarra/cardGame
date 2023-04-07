@@ -1,6 +1,5 @@
 import "./App.css";
-import React, {useState, useEffect} from "react";
-//import Grid from "./components/Grid";
+import React from "react";
 
 import {  Routes, Route } from 'react-router-dom';
 import { Navbar, Footer } from './components';
@@ -26,7 +25,7 @@ const App = () => {
         setCard(json);
     }*/
 
-    const Card = ({value, color}) => {
+    /*const Card = ({value, color}) => {
         return (
             <div
                 className={`card ${color}`}
@@ -36,7 +35,7 @@ const App = () => {
                 {value}
             </div>
         )
-    }
+    }*/
 
     return (
         <div className="bg-primary w-full overflow-hidden">

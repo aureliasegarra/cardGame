@@ -1,35 +1,28 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import axios from "axios";
 
-const Signin = () => {
-    const userRef = useRef();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [isLogged, setIsLogged] = useState(false);
 
-    useEffect(() => {
-        userRef.current.focus();
-    }, [])
 
-    async function handleOnLogin(event){
-        event.preventDefault();
+const Signin = ({setLoginPlayer}) => {
+    //const history = useHistory();
+    const [player, setPlayer] = useState({
+        email:"",
+        password:""
+    });
 
-        const response = await fetch('http://localhost:8000/api/login', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email,
-                password,
-            })
+    const handleChange = event => {
+        const {name, value} = event.target;
+        setPlayer({
+            ...player, //spread operator
+            [name]:value
         })
-        const data = await response.json();
-        console.log(data);
-        setIsLogged(!isLogged);
     }
 
-    if(isLogged) return (<Navigate to="/" />)
+    const handleOnLogin = () => {
+        axios.post("http://localhost:8000/api/players/login", player)
+            .then(res => {alert(res.data.message)
+            setLoginPlayer(res.data.player)})
+    };
 
     return (
         <div className="flex flex-col justify-center items-center bg-secondary h-screen p-10">
@@ -43,11 +36,12 @@ const Signin = () => {
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
-                            value={email}
-                            ref={userRef}
+                            name="email"
                             id="email"
                             className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={player.email}
+                            onChange={handleChange}
+                            placeholder="Your email"
                             required
                         />
                     </div>
@@ -56,11 +50,12 @@ const Signin = () => {
                         <label htmlFor="password">Password</label>
                         <input
                             type="password"
-                            value={password}
-                            ref={userRef}
+                            name="password"
                             id="password"
                             className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800"
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={player.password}
+                            onChange={handleChange}
+                            placeholder={"Your password"}
                             required
                         />
                     </div>
@@ -80,4 +75,4 @@ const Signin = () => {
     )
 }
 
-export default Signin
+export default Signin;
