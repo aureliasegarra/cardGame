@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from "axios";
+import {Navigate} from "react-router-dom";
 
 
-
-const Signin = ({setLoginPlayer}) => {
-    //const history = useHistory();
+const Signin = () => {
+    const [logged, setLogged] = useState(false);
     const [player, setPlayer] = useState({
         email:"",
         password:""
@@ -20,9 +20,15 @@ const Signin = ({setLoginPlayer}) => {
 
     const handleOnLogin = () => {
         axios.post("http://localhost:8000/api/players/login", player)
-            .then(res => {alert(res.data.message)
-            setLoginPlayer(res.data.player)})
+            .then(res => {
+                console.log(res.data);
+                setPlayer(res.data.player);
+            });
+        setLogged(!logged);
+
     };
+
+    if(logged) return <Navigate to="/game" />;
 
     return (
         <div className="flex flex-col justify-center items-center bg-secondary h-screen p-10">

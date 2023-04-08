@@ -5,10 +5,10 @@ function Board(props) {
     const boardSize = 11;
     const board = Array(boardSize).fill(null).map(() => Array(boardSize).fill(null));
 
-    const handleDragStart = (event) => {
+    /*const handleDragStart = (event) => {
         const cardId = event.target.id;
         event.dataTransfer.setData('cardId', cardId);
-    }
+    }*/
 
     const handleDragOver = (event) => {
         event.preventDefault();

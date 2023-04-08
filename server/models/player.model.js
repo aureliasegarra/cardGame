@@ -20,19 +20,24 @@ module.exports = mongoose =>{
                     trim: true,
                     required: true
                 },
+                played: {
+                    type:Number,
+                    default: 0
+                },
+                victory: {
+                    type:Number,
+                    default: 0
+                },
+                defeat: {
+                    type:Number,
+                    default: 0
+                }
             },
             { timestamps: true // ajoute 2 champs au document createdAt et updatedAt
             }
         )
     );
-    // hook executé avant la sauvegarde d'un document. Hash le mot de passe quand il est modifié
-    /*Player.pre('save', function(next) {
-        if (!this.isModified('password')) {
-            return next();
-        }
-        this.password = bcrypt.hashSync(this.password, 10);
-        next();
-    });*/
+
 
     return Player;
 };

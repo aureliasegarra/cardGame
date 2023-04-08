@@ -1,20 +1,26 @@
-const mongoose = require('mongoose');
+module.exports = mongoose => {
+    const Card = mongoose.model(
+        "cards",
+        mongoose.Schema(
+            {
+                value: {
+                    type:  Number,
+                    required: true,
+                    min: 1,
+                    max: 9
+                },
+                color: {
+                    type: String,
+                    required: true
+                },
+                isFlipped: {
+                    type: Boolean,
+                    required: true,
+                }
+            },
+            { timestamps: true }
+        )
+    );
 
-const cardSchema = new mongoose.Schema({
-    value: {
-        type: String,
-        required: true
-    },
-    suit: {
-        type: String,
-        required: true
-    },
-    image: {
-        type: String,
-        required: true
-    }
-});
-
-const CardModel = mongoose.model('Card', cardSchema);
-
-module.exports = CardModel;
+    return Card;
+};

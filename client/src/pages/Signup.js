@@ -22,7 +22,6 @@ const Signup = () => {
     const handleOnSubmit = (event) => {
         event.preventDefault();
         const {username, email, password} = player;
-        console.log("player", player);
 
         if (username && email && password){
             axios.post("http://localhost:8000/api/players/register", player)
