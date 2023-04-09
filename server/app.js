@@ -38,6 +38,13 @@ app.get('/api', async (req, res) => {
     res.json({ message: 'Bienvenue sur l\'API !'});
 });
 
+// ROUTE DISPLAY DECK
+app.get('/deck', (req, res) => {
+    const deck = game.getDeck();
+    res.send(deck);
+});
+
+
 // ERROR CASE
 app.use((err, req, res, next) => {
     res.status(404).json({name: 'API', version: '1.0', status: 404, message: 'not_found'});
