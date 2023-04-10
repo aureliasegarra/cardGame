@@ -1,41 +1,30 @@
 import "./App.css";
-import React from "react";
-
+import React, {useState, useEffect} from "react";
+import axios from 'axios';
 import {  Routes, Route } from 'react-router-dom';
 import { Navbar, Footer } from './components';
 import Home from './pages/Home.js';
 import Rules from './pages/Rules.js';
 import Signup from './pages/Signup.js';
 import Signin from './pages/Signin.js';
-import Game from './pages/Game.js';
+//import Game from './pages/Game.js';
+import Deck from './components/Deck';
 
 
 
 const App = () => {
 
- /*   const [cards, setCard] = useState([]);
+    const [deck, setDeck] = useState([]);
 
+    // Appelé 1 fois lors du 1er rendu de l'application grâce au tableau vide en 2em argument
     useEffect(() => {
-        fetchData();
-    }, [])
+        const fetchDeck = async () => {
+            const response = await axios.get("http://localhost:8000/api/cards/");
+            setDeck(response.data);
+        };
+        fetchDeck();
+    },[]);
 
-    const fetchData = async () => {
-        const res = await fetch(`http://localhost:8000/cards`);
-        const json = await res.json();
-        setCard(json);
-    }*/
-
-    /*const Card = ({value, color}) => {
-        return (
-            <div
-                className={`card ${color}`}
-                draggable={true}
-                onDragStart={event => event.dataTransfer.setData("value", value)}
-            >
-                {value}
-            </div>
-        )
-    }*/
 
     return (
         <div className="bg-primary w-full overflow-hidden">
@@ -45,6 +34,9 @@ const App = () => {
                 </div>
             </div>
 
+            {/*{<div>
+                {deck.length > 0 && <Deck cards={deck} />}
+            </div>}*/}
 
             <div>
                 <Routes>
@@ -52,7 +44,7 @@ const App = () => {
                     <Route path='/rules' exact element={<Rules />} />
                     <Route path='/register' exact element={<Signup />} />
                     <Route path='/signin' exact element={<Signin />} />
-                    <Route path='/game' exact element={<Game />} />
+                    <Route path='/game' exact element={<Deck deck={deck} /> } />
                 </Routes>
             </div>
 

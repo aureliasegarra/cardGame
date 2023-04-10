@@ -1,6 +1,20 @@
 const mongoose = require("mongoose");
 const Card = require("../models/card.model")(mongoose);
 
+exports.findAll = (req, res) => {
+    Card.find()
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving cards."
+            });
+        });
+
+};
+
 exports.createDeck = async (req, res) => {
     try {
         const count = await Card.countDocuments();
@@ -30,6 +44,9 @@ exports.createDeck = async (req, res) => {
             console.log("Deck created successfully!");
         } else {
             //res.status(400).json({ message: "Deck already exists!" });
+            const allCards = await Card.find();
+
+            console.log(allCards);
             console.log("Deck already exists!");
         }
     } catch (error) {
@@ -63,18 +80,7 @@ exports.create = (req, res) => {
         });
 };
 
-exports.findAll = (req, res) => {
-    Card.find()
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving cards."
-            });
-        });
-};
+
 
 exports.distribute = async (req, res) => {
     try {

@@ -1,17 +1,20 @@
-const express = require('express');
-const router = express.Router();
-const gameController = require('../controllers/game.controller');
+module.exports = app => {
+    const games = require("../controllers/game.controller");
+    const router = require("express").Router();
 
-// Route pour créer une nouvelle partie
-router.post('/new-game', gameController.newGame);
+    // Route pour créer une nouvelle partie
+    router.post('/new-game', games.newGame);
 
-// Route pour récupérer le deck de la partie
-router.get('/deck', gameController.getDeck);
+    // Route pour récupérer le deck de la partie
+    router.get('/deck', games.getDeck);
 
-// Route pour mélanger le deck
-router.post('/shuffle-deck', gameController.shuffleDeck);
+    // Route pour mélanger le deck
+    router.post('/shuffle-deck', games.shuffleDeck);
 
-// Route pour distribuer les cartes
-router.post('/deal-cards', gameController.dealCards);
+    // Route pour distribuer les cartes
+    router.post('/deal-cards', games.dealCards);
 
-module.exports = router;
+    app.use("/api/games", router);
+}
+
+

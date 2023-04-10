@@ -1,15 +1,34 @@
 const mongoose = require("mongoose");
-const Game = require("../models/game.model");
+const Game = require("../models/game.model")(mongoose);
 
-exports.getDeck = (req, res) => {
-    const deck = Game.getDeck();
-    res.send(deck);
+
+exports.getDeck = async (req, res) => {
+    try {
+        const game = await Game.findOne().select('deck').populate('deck');
+        console.log(game);
+        res.send(game.deck);
+    } catch (err) {
+        console.log(err);
+        res.status(500).send({ message: 'An error occurred while retrieving the deck.' });
+    }
 };
 
 exports.newGame = (req, res) => {
-    const players = req.body.players;
-    const game = new Game(players);
-    res.send(game);
+    const game = new Game({
+        players: [],
+        deck: [],
+        square: [[], [], [], []],
+        currentPlayer: null,
+        winner: null,
+    });
+    game.save((err, game) => {
+        if (err) {
+            res.status(500).send({ message: err });
+            return;
+        }
+
+        res.send({ id: game._id });
+    });
 };
 
 exports.shuffleDeck = async (req, res) => {
