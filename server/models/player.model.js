@@ -37,7 +37,5 @@ module.exports = mongoose =>{
             }
         )
     );
-
-
     return Player;
 };
