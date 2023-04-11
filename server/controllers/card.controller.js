@@ -29,30 +29,24 @@ exports.createDeck = async (req, res) => {
                     cards.push({
                         color,
                         value: value,
-                        isFlipped: false
+                        isFlipped: true
                     });
                     cards.push({
                         color,
                         value: value,
-                        isFlipped: false
+                        isFlipped: true
                     });
                 });
             });
 
             await Card.insertMany(cards);
-            //res.status(201).json({ message: "Deck created successfully!" });
             console.log("Deck created successfully!");
         } else {
-            //res.status(400).json({ message: "Deck already exists!" });
             const allCards = await Card.find();
-
-            console.log(allCards);
             console.log("Deck already exists!");
         }
     } catch (error) {
         console.error(error);
-        //res.status(500).json({ message: "Internal server error" });
-
     }
 }
 
@@ -79,8 +73,6 @@ exports.create = (req, res) => {
             });
         });
 };
-
-
 
 exports.distribute = async (req, res) => {
     try {

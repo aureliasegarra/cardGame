@@ -1,9 +1,9 @@
 import React from "react";
 import Card from "./Card";
 
-const Deck = ({ cards, deck }) => {
+const Deck = ({ deck }) => {
     return (
-        <div className="deck">
+        <div className="flex-auto ml-6 mt-6">
             {deck.map((card) => (
                 <Card key={card._id} card={card} />
             ))}
@@ -11,8 +11,8 @@ const Deck = ({ cards, deck }) => {
     );
 };
 
-Deck.defaultProps = {
+/*Deck.defaultProps = {
     cards: []
-};
+};*/
 
 export default Deck;

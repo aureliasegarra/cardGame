@@ -34,10 +34,6 @@ const App = () => {
                 </div>
             </div>
 
-            {/*{<div>
-                {deck.length > 0 && <Deck cards={deck} />}
-            </div>}*/}
-
             <div>
                 <Routes>
                     <Route path='/' exact element={<Home />} />
